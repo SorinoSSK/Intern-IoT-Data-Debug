@@ -13,7 +13,7 @@
     ```
     depending on your version of Python.
 
-Notes:
+Notes:  
 If you are receiving errors while installing using **pip install**, please run your command prompt using administration.
 
 ## Pre-RunScript Settings
@@ -30,6 +30,7 @@ If you are receiving errors while installing using **pip install**, please run y
 4. Modify ```LOGS_DISPLAY_PAGE_SIZE``` and ```WITHIN_DAYS``` to collect your data. 
 &nbsp&nbsp - ```LOGS_DISPLAY_PAGE_SIZE``` represents the maximum number of data to be collected.
 &nbsp&nbsp - ```WITHIN_DAYS``` represents the the number of days up to today. (Data tagged by dates)
+5. If you are required to change features column to read, use visual studio code and open up ```unit_data.py```. Add or remove column in the global variable ```col```
 
 ## Run Script
 1. Open CLI of choice / launch `unit_status.py` with Python's IDLE.
