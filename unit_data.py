@@ -194,6 +194,8 @@ def run_vft_status(units):
             if response.status_code != 200:
                 print("Error in fetching " + unit_name + " data for VFT, HTTP status code: ", response.status_code)
                 status[unit_name] = ("error", FAILED_RETRIEVAL)
+                if response.status_code == 500:
+                    response = retry_ping(response, unit_name, endpoint, headers, params, 0)
                 continue # do not process further
 
             try:
