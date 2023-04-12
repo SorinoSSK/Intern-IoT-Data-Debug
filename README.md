@@ -42,5 +42,5 @@ If you are receiving errors while installing using **pip install**, please run y
     ```
     python3 unit_data.py
     ```
-
-For more details, see the documentation under `documentation/`.
+3. Select mads or vft, by default (mads) is selected.
+4. Login into your account.
