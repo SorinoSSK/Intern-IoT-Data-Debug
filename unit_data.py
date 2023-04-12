@@ -50,7 +50,7 @@ def configure_vft():
     
     units = {}
     for _, row in df.iterrows():
-        units[row[0]] = (row[1], row[2], row[3])
+        units[row[0]] = row[1]
     return units
 
 def configure_account_fields():
@@ -114,7 +114,13 @@ def run_mad_status(units):
                 json_dump = response.json()
                 for value in json_dump["data_dumps"]:
                     date_time = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(value["data"]["timestamp"]))
-                    ls.append([date_time, value["data"]["assets_params"][col[1]], value["data"]["assets_params"][col[2]], value["data"]["assets_params"][col[3]], value["data"]["assets_params"][col[4]]])
+                    ls_temp = []
+                    for index, value_temp in enumerate(col):
+                        if index == 0:
+                            ls_temp.append(date_time)
+                        else:
+                            ls_temp.append(value["data"]["assets_params"][value_temp])
+                    ls.append(ls_temp)
                 df = pd.DataFrame(ls, columns=col)
                 fileName = "output\output_"+ unit_name + ".xlsx"
                 df.to_excel(fileName,sheet_name="Generated Data")
@@ -194,7 +200,13 @@ def run_vft_status(units):
                 json_dump = response.json()
                 for value in json_dump["data_dumps"]:
                     date_time = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(value["data"]["timestamp"]))
-                    ls.append([date_time, value["data"]["assets_params"][col[1]], value["data"]["assets_params"][col[2]], value["data"]["assets_params"][col[3]], value["data"]["assets_params"][col[4]]])
+                    ls_temp = []
+                    for index, value_temp in enumerate(col):
+                        if index == 0:
+                            ls_temp.append(date_time)
+                        else:
+                            ls_temp.append(value["data"]["assets_params"][value_temp])
+                    ls.append(ls_temp)
                 df = pd.DataFrame(ls, columns=col)
                 fileName = "output\output_"+ unit_name + ".xlsx"
                 df.to_excel(fileName,sheet_name="Generated Data")
