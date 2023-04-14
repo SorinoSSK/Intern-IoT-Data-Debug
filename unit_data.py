@@ -24,7 +24,7 @@ SENDER_EMAIL                = None
 RECIPIENTS                  = None
 EMAIL_API_KEY               = None
 PORT                        = None
-col                         = ["date", "bvolt", "bpow", "bcurr", "bsoc"]
+col                         = ["date", "bocv", "nthlf", "pthlf", "ntllf", "ptllf", "prcr", "prdr"]
 # Error message
 FAILED_RETRIEVAL = "Likely a server issue. Refresh the unit's logs data page on platform."
 
