@@ -19,18 +19,13 @@ If you are receiving errors while installing using **pip install**, please run y
 ## Pre-RunScript Settings
 1. Open up
     ```
-    mads_config.xlsx
+    query_config.xlsx
     ```
-    or
-    ```
-    vft_config.xlsx
-    ```
-2. Modify the ```Unit ID``` and ```Unit name``` in the excel sheet with reference to ```vft_unit_list.xlsx```. You may enter details of multiple units.
-3. Go to ```data_sheet``` within the same config excel file.
-4. Modify ```LOGS_DISPLAY_PAGE_SIZE``` and ```WITHIN_DAYS``` to collect your data. 
-&nbsp&nbsp - ```LOGS_DISPLAY_PAGE_SIZE``` represents the maximum number of data to be collected.
-&nbsp&nbsp - ```WITHIN_DAYS``` represents the the number of days up to today. (Data tagged by dates)
-5. If you are required to change features column to read, use visual studio code and open up ```unit_data.py```. Add or remove column in the global variable ```col```
+2. Modify the ```Unit name```, ```Number of days```, and ```System``` in the excel sheet.  
+&nbsp&nbsp - The program will only query for 1 unit, entering multiple units will not work.
+&nbsp&nbsp - Do not modify ```Unit ID```
+3. Go to ```columns_to_query``` within the same ```query_config.xlsx``` excel file.
+5. Add or remove column in ```Columns To Read```
 
 ## Run Script
 1. Open CLI of choice / launch `unit_status.py` with Python's IDLE.
