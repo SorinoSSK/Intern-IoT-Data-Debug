@@ -22,8 +22,8 @@ If you are receiving errors while installing using **pip install**, please run y
     query_config.xlsx
     ```
 2. Modify the ```Unit name```, ```Number of days```, and ```System``` in the excel sheet.  
-&nbsp&nbsp - The program will only query for 1 unit, entering multiple units will not work.
-&nbsp&nbsp - Do not modify ```Unit ID```
+&nbsp;&nbsp; - The program will only query for 1 unit, entering multiple units will not work.
+&nbsp;&nbsp; - Do not modify ```Unit ID```
 3. Go to ```columns_to_query``` within the same ```query_config.xlsx``` excel file.
 5. Add or remove column in ```Columns To Read```
 
