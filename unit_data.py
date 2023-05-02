@@ -114,7 +114,7 @@ def run_mad_status(key, unitsVal, curr_time, start_time, token, ls = [], pageNum
                     sys.stdout.flush()
                     df = pd.DataFrame(ls, columns=col)
                     fileName = "output\output_"+ unit_name + ".xlsx"
-                    df.to_excel(fileName,sheet_name="Generated Data")
+                    df[::-1].to_excel(fileName,sheet_name="Generated Data")
                     print("Data retrieved for", unit_name, ", and saved on", fileName)
                     
             except json.JSONDecodeError:
@@ -207,7 +207,7 @@ def run_vft_status(key, unitsVal, curr_time, start_time, token, ls = [], pageNum
                     sys.stdout.flush()
                     df = pd.DataFrame(ls, columns=col)
                     fileName = "output\output_"+ unit_name + ".xlsx"
-                    df.to_excel(fileName,sheet_name="Generated Data")
+                    df[::-1].to_excel(fileName,sheet_name="Generated Data")
                     print("Data retrieved for", unit_name, ", and saved on", fileName)                    
             except json.JSONDecodeError:
                 print(
