@@ -4,6 +4,8 @@ import json
 import time
 import requests
 import pandas as pd
+from dateutil import parser
+from datetime import datetime
 import sys
 import warnings
 
@@ -38,7 +40,10 @@ def configure():
     units = {}
     for _, row in df.iterrows():
         if row[0] != "":
-            tempVal = unitsE(row[1],int(row[2]),row[3])
+            if row[4] != "" and row[5] != "":
+                tempVal = unitsE(row[1],int(row[2]),row[3],False,row[4],row[5])
+            else:
+                tempVal = unitsE(row[1],int(row[2]),row[3])
             units[int(row[0])] = tempVal
             break
 
@@ -225,6 +230,15 @@ def run_vft_status(key, unitsVal, curr_time, start_time, token, ls = [], pageNum
             print(e)
 
 ### Utils
+def get_date_time(date):
+    # print(parser.parse(date))
+    return parser.parse(date)
+
+def get_time_stamp(date):
+    value = int(datetime.timestamp(date))* 1000
+    # print(value)
+    return value
+
 def get_current_time():
     return int(time.time() * 1000)
 
@@ -235,10 +249,14 @@ def get_online_from(curr_time, WITHIN_HOURS):
     return curr_time - 60 * 60 * WITHIN_HOURS * 1000
 
 class unitsE:
-    def __init__(self, name, days, plt):
+    def __init__(self, name, days, plt, dayDate=True, FDate='1800-01-01 00:00:00', TDate='1800-01-01 00:00:00'):
+        # True = day, False = date
         self.name = name
         self.days = days
         self.plt = plt
+        self.FromDate = get_time_stamp(FDate)
+        self.ToDate = get_time_stamp(TDate)
+        self.dayDate = dayDate
 
 ### Main Code
 def generate_report(mads = False):
@@ -251,10 +269,13 @@ def generate_report(mads = False):
                 url = "https://datakrewtech.com/api/sign-in"
                 rq = requests.post(url, data=ACCOUNT_LOGIN)
                 token = rq.json()["access_token"]
-
-                curr_time = get_current_time()
-                within_days = values.days
-                start_time = get_partial_from(curr_time, within_days) # consider logs from WITHIN_DAYS ago
+                if values.dayDate:
+                    curr_time = get_current_time()
+                    within_days = values.days
+                    start_time = get_partial_from(curr_time, within_days) # consider logs from WITHIN_DAYS ago
+                else:
+                    curr_time = values.ToDate
+                    start_time = values.FromDate
                 run_mad_status(key, values, curr_time, start_time, token)
             except Exception as e:
                 print(e)
@@ -271,9 +292,13 @@ def generate_report(mads = False):
                 rq = requests.post(url, headers=org_headers)
                 token = rq.json()["access_token"]
 
-                curr_time = get_current_time()
-                within_days = values.days
-                start_time = get_partial_from(curr_time, within_days) # consider logs from WITHIN_DAYS ago
+                if values.dayDate:
+                    curr_time = get_current_time()
+                    within_days = values.days
+                    start_time = get_partial_from(curr_time, within_days) # consider logs from WITHIN_DAYS ago
+                else:
+                    curr_time = values.ToDate
+                    start_time = values.FromDate
                 run_vft_status(key, values, curr_time, start_time, token)
             except Exception as e:
                 try:

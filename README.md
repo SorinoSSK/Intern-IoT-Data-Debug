@@ -39,3 +39,6 @@ If you are receiving errors while installing using **pip install**, please run y
     ```
 3. Select mads or vft, by default (mads) is selected.
 4. Login into your account.
+
+## Error Code 500
+If ```error Code 500``` occurs, please access the ```latest logs``` section in either platform and select ```30 Days``` to pre-load the data.
