@@ -6,6 +6,7 @@ import requests
 import pandas as pd
 from dateutil import parser
 from datetime import datetime
+from datetime import timedelta
 import sys
 import warnings
 
@@ -129,13 +130,13 @@ def run_mad_status(key, unitsVal, curr_time, start_time, token, ls = [], pageNum
                 print("Invalid Account!")
             elif (len(e.args) > 1):
                 if e.args[0].upper() in "CONNECTION ABORTED":
-                    print("Error Messsage: ", e)
-                    print("Resend")
+                    print("Error Messsage: ", e, "                        ")
+                    print("Resend", "                        ")
                     run_mad_status(key, unitsVal, curr_time, start_time, token, ls, pageNumber)
             else:
-                print(e)
+                print(e, "                        ")
         except:
-            print(e)
+            print(e, "                        ")
 
 def retry_ping(response, unit_name, endpoint, headers, params, count):
     if count < 5:
@@ -221,13 +222,13 @@ def run_vft_status(key, unitsVal, curr_time, start_time, token, ls = [], pageNum
                 print("Invalid Account!")
             elif (len(e.args) > 1):
                 if e.args[0].upper() in "CONNECTION ABORTED":
-                    print("Error Messsage: ", e)
-                    print("Resend")
+                    print("Error Messsage: ", e, "                        ")
+                    print("Resend", "                        ")
                     run_vft_status(key, unitsVal, curr_time, start_time, token, ls, pageNumber)
             else:
-                print(e.args[0])
+                print(e.args[0], "                        ")
         except:
-            print(e)
+            print(e, "                        ")
 
 ### Utils
 def get_date_time(date):
@@ -255,7 +256,8 @@ class unitsE:
         self.days = days
         self.plt = plt
         self.FromDate = get_time_stamp(FDate)
-        self.ToDate = get_time_stamp(TDate)
+        self.ToDate = get_time_stamp(TDate) + 24*60*60*1000
+        print(self.ToDate, get_time_stamp(TDate))
         self.dayDate = dayDate
 
 ### Main Code

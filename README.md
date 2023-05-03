@@ -24,7 +24,9 @@ If you are receiving errors while installing using **pip install**, please run y
 2. Modify the ```Unit name```, ```Number of days```, and ```System``` in the excel sheet.  
 &nbsp;&nbsp; - The program will only query for 1 unit, entering multiple units will not work.  
 &nbsp;&nbsp; - Do not modify ```Unit ID```
-3. Go to ```columns_to_query``` within the same ```query_config.xlsx``` excel file.
+3. Do note that if you require to retrieve data from date range, modify ```From Date``` and ```To Date```.
+&nbsp;&nbsp; - If you **DO NOT** need to retrieve from date range, leave ```From Date``` and ```To Date``` **empty**.
+4. Go to ```columns_to_query``` within the same ```query_config.xlsx``` excel file.
 5. Add or remove column in ```Columns To Read```
 
 ## Run Script
