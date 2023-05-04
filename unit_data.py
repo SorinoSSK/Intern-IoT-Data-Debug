@@ -250,7 +250,7 @@ def get_online_from(curr_time, WITHIN_HOURS):
     return curr_time - 60 * 60 * WITHIN_HOURS * 1000
 
 class unitsE:
-    def __init__(self, name, days, plt, dayDate=True, FDate='1800-01-01 00:00:00', TDate='1800-01-01 00:00:00'):
+    def __init__(self, name, days, plt, dayDate=True, FDate=pd.Timestamp('2000-01-01'), TDate=pd.Timestamp('2000-01-01')):
         # True = day, False = date
         self.name = name
         self.days = days
@@ -301,6 +301,7 @@ def generate_report(mads = False):
                 else:
                     curr_time = values.ToDate
                     start_time = values.FromDate
+                print(curr_time, start_time)
                 run_vft_status(key, values, curr_time, start_time, token)
             except Exception as e:
                 try:
