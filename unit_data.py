@@ -257,8 +257,11 @@ class unitsE:
         self.plt = plt
         self.FromDate = get_time_stamp(FDate)
         self.ToDate = get_time_stamp(TDate) + 24*60*60*1000
-        print(self.ToDate, get_time_stamp(TDate))
+        # print(self.ToDate, self.FromDate)
         self.dayDate = dayDate
+        if self.ToDate < self.FromDate:
+            print("\033[91mError: Your \"To Date\" is larger than \"From Date\". Please reconfigure your dates in query_config.xlsx.\033[0m")
+            sys.exit()
 
 ### Main Code
 def generate_report(mads = False):
@@ -301,7 +304,7 @@ def generate_report(mads = False):
                 else:
                     curr_time = values.ToDate
                     start_time = values.FromDate
-                print(curr_time, start_time)
+                # print(curr_time, start_time)
                 run_vft_status(key, values, curr_time, start_time, token)
             except Exception as e:
                 try:
