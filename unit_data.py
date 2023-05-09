@@ -43,6 +43,7 @@ def configure():
         if row[0] != "":
             if row[4] != "" and row[5] != "":
                 tempVal = unitsE(row[1],int(row[2]),row[3],False,row[4],row[5])
+                print("Retrieving data from", row[4], "to", row[5])
             else:
                 tempVal = unitsE(row[1],int(row[2]),row[3])
             units[int(row[0])] = tempVal
@@ -104,6 +105,8 @@ def run_mad_status(key, unitsVal, curr_time, start_time, token, ls = [], pageNum
                     for index, value_temp in enumerate(col):
                         if index == 0:
                             ls_temp.append(date_time)
+                        elif index == 1:
+                            ls_temp.append(value["data"]["timestamp"])
                         else:
                             ls_temp.append(value["data"]["assets_params"][value_temp])
                     ls.append(ls_temp)
@@ -197,6 +200,8 @@ def run_vft_status(key, unitsVal, curr_time, start_time, token, ls = [], pageNum
                     for index, value_temp in enumerate(col):
                         if index == 0:
                             ls_temp.append(date_time)
+                        elif index == 1:
+                            ls_temp.append(value["data"]["timestamp"])
                         else:
                             ls_temp.append(value["data"]["assets_params"][value_temp])
                     ls.append(ls_temp)
@@ -281,6 +286,7 @@ def generate_report(mads = False):
                 else:
                     curr_time = values.ToDate
                     start_time = values.FromDate
+                print("Debug: From integer", start_time, "To integer", curr_time)
                 run_mad_status(key, values, curr_time, start_time, token)
             except Exception as e:
                 print(e)
@@ -305,6 +311,7 @@ def generate_report(mads = False):
                     curr_time = values.ToDate
                     start_time = values.FromDate
                 # print(curr_time, start_time)
+                print("Debug: From integer", start_time, "To integer", curr_time)
                 run_vft_status(key, values, curr_time, start_time, token)
             except Exception as e:
                 try:
@@ -332,8 +339,3 @@ if __name__ == "__main__":
     warnings.simplefilter(action='ignore', category=UserWarning)
     generate_report()
     # sendEmail()
-   
-
-    
-
-        
