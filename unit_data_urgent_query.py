@@ -130,15 +130,15 @@ def run_vft_status(key, unitsVal, curr_time, start_time, token, ls = [], pageNum
                         if index == 0:
                             date_time = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(i[0]/1000))
                             time_stamp.append(date_time)
-                        ls_temp.append(i[1])
+                        ls_temp.append(float(i[1]))
                     if time_stamp != [] and index == 0:
                         ls.append(time_stamp)
                         index = index + 1
                     ls.append(ls_temp)
                 set_zeros(ls)
-                df = pd.DataFrame(np.array(ls).T.tolist(), columns=col)
+                df = pd.DataFrame(np.array(ls).T.tolist(), columns=col, dtype=float)
                 fileName = "output\output_"+ unit_name + ".xlsx"
-                df[::-1].to_excel(fileName,sheet_name="Generated Data")
+                df[::-1].to_excel(fileName,sheet_name="Generated Data",float_format="%0.5f")
                 print("Data retrieved for", unit_name, ", and saved on", fileName)         
             except json.JSONDecodeError:
                 print(
@@ -232,5 +232,6 @@ def generate_report():
 if __name__ == "__main__":
     input("\033[91m(Reminder) Have you configured query_config_urgent_query.xlsx to proceed with this prompt?\033[0m")
     warnings.simplefilter(action='ignore', category=UserWarning)
+    warnings.simplefilter(action='ignore', category=FutureWarning)
     generate_report()
     # sendEmail()
