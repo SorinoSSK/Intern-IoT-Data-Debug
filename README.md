@@ -1,3 +1,6 @@
+# Introduction
+Hi future interns, this script is modified from [Andres](https://github.com/4ndrelim) and his precestor's code to download data of existing units for debugging. This copy is stored here due to the user limitation of bitbucket and this copy of the script will require authentication as compared to the ones in the bitbucket.
+
 # How To Use
 
 ## Requirements
